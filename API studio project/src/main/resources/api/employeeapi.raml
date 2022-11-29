@@ -1,0 +1,12 @@
+#%RAML 1.0
+title: My-API
+version: v1
+baseUri: http://localhost:8081
+/employees:
+  get:
+    description: List of all the employees
+    responses:
+      200:
+        body:
+          application/xml:
+            example: !include employees-example.xml

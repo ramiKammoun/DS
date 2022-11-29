@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="employees" format="xml">
+      <types:example format="xml" element="employees" location="examples/employees1-example.xml"/>
+    </types:type>
+    <types:type name="salariesdollars" format="json">
+      <types:shape format="weave" example="examples/salaries.json"><![CDATA[%dw 2.0
+
+type salariesdollars = {| employees: Array<{| salarydollar: Number {"typeId": "int"} |}> |} {"example": "{\\\"employees\\\":[{\\\"salarydollar\\\":1},{\\\"salarydollar\\\":2}]}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#08c471cc-baf9-43eb-81a2-8c40ff0745c3">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="employees"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="salariesdollars"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#1eeb6583-a1bd-4bc7-942b-4c6b3aace691">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="employees"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="salariesdollars"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
